@@ -77,7 +77,7 @@ const init = () => {
    inquirer.prompt(questions)
    .then((answers) => {
        const {title, description, accomplished, install, uses, license, username, contributors, repo, livelink} =  answers;
-       const string = `# ${answers.title}\n## Table of Contents\n\n## Introduction\n${answers.description}\n\n## How the project was accomplished\n ${answers.accomplished}\n\n## Installation Guide\n ${answers.install}\n\n## Usability\n ${answers.uses}\n\n## Links to Gihub Repository and Live Site\n Github Repo: ${answers.repo}\n Live Site: ${answers.livelink}\n\n## Questions?\n Creator: ${answers.username}\n Email me at: ${answers.email}\n Contributors: ${answers.contributors}`;
+       const string = `# ${answers.title}\n\n## Introduction\n${answers.description}\n\n## How the project was accomplished\n ${answers.accomplished}\n\n## Installation Guide\n ${answers.install}\n\n## Usability\n ${answers.uses}\n\n## Links to Gihub Repository and Live Site\n Github Repo: ${answers.repo}\n Live Site: ${answers.livelink}\n\n## Questions?\n Creator: ${answers.username}\n Email me at: ${answers.email}\n Contributors: ${answers.contributors}`;
        fs.writeFile('newREADME.md', string, (err) => {
            if (err) throw err;
            console.log('The file has been saved.');
