@@ -1,7 +1,8 @@
 // TODO: Include packages needed for this application
+const util = require('util');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const newMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -12,7 +13,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'description',
+        name: 'introduction',
         message: 'Give a brief introduction/description of the project:'
     },
     {
@@ -40,7 +41,8 @@ const questions = [
             'GPL',
             'ISC',
             'Mozilla', 
-            'Open'
+            'Open',
+            'n/a'
         ]
     },
     {
@@ -72,13 +74,15 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeToFile('newREADME.md', data, err => {
+    fs.writeFile(fileName, data, err => {
         if (err) {
             return console.log(err);
         };
         console.log('The file has been saved.')
     });
 }
+
+const writeFile = util.promisify(writetoFile);
 
 // TODO: Create a function to initialize app
 async function init() {
@@ -88,8 +92,9 @@ async function init() {
     console.log('Applying entries... Here are your changes:');
     console.log(entries);
 
-    const createMarkdown = generateMarkdown(entries);
-    console.log(createMarkdown);
+    const passIntoGM = newMarkdown(entries);
+
+    await createFile('newREADME.md', passIntoGM);
 
 //    inquirer.prompt(questions)
 //    .then((answers) => {
